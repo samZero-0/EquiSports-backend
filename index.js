@@ -40,6 +40,14 @@ async function run() {
             res.send(result);
         });
 
+        app.get('/equipments/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = {userEmail: `${email}`}
+            const cursor = equipmentCollection.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        });
+
         app.get('/equipments/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
@@ -50,10 +58,11 @@ async function run() {
         app.post('/equipments', async (req, res) => {
             const newEquipment = req.body;
             console.log('Adding new equipment', newEquipment)
-
             const result = await equipmentCollection.insertOne(newEquipment);
             res.send(result);
         });
+
+
 
         // app.put('/equipments/:id', async (req, res) => {
         //     const id = req.params.id;
