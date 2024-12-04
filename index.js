@@ -40,7 +40,7 @@ async function run() {
             res.send(result);
         });
 
-        app.get('/equipments/:email', async (req, res) => {
+        app.get('/equipments/byEmail/:email', async (req, res) => {
             const email = req.params.email;
             const query = {userEmail: `${email}`}
             const cursor = equipmentCollection.find(query);
