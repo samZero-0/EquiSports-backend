@@ -64,24 +64,37 @@ async function run() {
 
 
 
-        // app.put('/equipments/:id', async (req, res) => {
-        //     const id = req.params.id;
-        //     const filter = { _id: new ObjectId(id) };
-        //     const options = { upsert: true };
-        //     const updatedDoc = {
-        //         $set: req.body
-        //     }
+        app.put('/equipments/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) };
+            const options = { upsert: true };
+            const updatedEquipment =req.body;
+            const equipment = {
+                $set: {
+                    img  : updatedEquipment.img,
+                    itemName : updatedEquipment.itemName,
+                    categoryName : updatedEquipment.categoryName,
+                    description : updatedEquipment.description,
+                    price : updatedEquipment.price,
+                    rating : updatedEquipment.rating,
+                    customization : updatedEquipment.customization,
+                    processingTime : updatedEquipment.processingTime,
+                    stockStatus : updatedEquipment.stockStatus,
+                    userEmail : updatedEquipment.userEmail,
+                    userName : updatedEquipment.userName,
+                }
+            }
 
-        //     const result = await coffeeCollection.updateOne(filter, updatedDoc, options )
+            const result = await equipmentCollection.updateOne(filter, equipment, options )
 
-        //     res.send(result);
-        // })
+            res.send(result);
+        })
 
         // app.delete('/equipments/:id', async (req, res) => {
         //     console.log('going to delete', req.params.id);
         //     const id = req.params.id;
         //     const query = { _id: new ObjectId(id) }
-        //     const result = await coffeeCollection.deleteOne(query);
+        //     const result = await equipmentCollection.deleteOne(query);
         //     res.send(result);
         // })
 
